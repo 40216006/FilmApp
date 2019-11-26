@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using FilmApp.Data;
 
 namespace FilmApp
 {
@@ -33,6 +35,9 @@ namespace FilmApp
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<FilmAppContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("FilmAppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
